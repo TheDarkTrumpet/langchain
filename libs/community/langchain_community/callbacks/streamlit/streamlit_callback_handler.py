@@ -393,7 +393,9 @@ class StreamlitCallbackHandler(BaseCallbackHandler):
         pass
 
     def on_chain_end(self, outputs: Dict[str, Any], **kwargs: Any) -> None:
-        pass
+        if 'answer' in outputs:
+            self.on_agent_finish(outputs['answer'])
+            self._parent_container.markdown(f'{outputs["answer"]}')
 
     def on_chain_error(self, error: BaseException, **kwargs: Any) -> None:
         pass
